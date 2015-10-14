@@ -59,7 +59,7 @@
 
 		//resizeImage($photo,920,920);
 	    // read overlay  
-		$overlay = imagecreatefrompng("images/overlay320n.png");
+		$overlay = imagecreatefrompng("images/overlay320n_b.png");
 	    // keep transparency of base image
 		imagesavealpha($base_image, true);
 		imagealphablending($base_image, true);
@@ -98,7 +98,7 @@
   </head>
   <body>
   <?php include_once("analyticstracking.php") ?>
-	<img src=<?php echo $bg_path?> class="bg">
+	<img src="images/bg1.jpeg" class="bg">
     <div class="container">
 	    <div class="row">
 	      
