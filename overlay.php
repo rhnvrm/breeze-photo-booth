@@ -1,6 +1,16 @@
-#overlay
+
 <?php 
+
+
+
 	require( __DIR__.'/facebook_start.php' );
+
+	  use Facebook\FacebookRequest;
+  use Facebook\GraphUser;
+  use Facebook\FacebookRequestException;
+
+require_once( 'Facebook/FacebookRequest.php' );
+require_once( 'Facebook/GraphNodes/GraphUser.php' );
 	
 	$token = $_SESSION['facebook_access_token'];
    	//$r = new HttpRequest('https://graph.facebook.com/me?access_token='.$r, HttpRequest::METH_POST);
@@ -105,7 +115,18 @@
 	<img src="images/redfort_night.jpg" class="bg">
     <div class="container">
 	    <div class="row">
-	      
+				<?php    
+				 if($token) {
+					  try {
+					    $user_profile = (new FacebookRequest(
+					      $token, 'GET', '/me'
+					    ))->execute()->getGraphObject(GraphUser::className());
+					    echo "Name: " . $user_profile->getName();
+					  } catch(FacebookRequestException $e) {
+					    echo "Exception occured, code: " . $e->getCode();
+					    echo " with message: " . $e->getMessage();
+					  }   
+				}?>
 	      <div class="header">
 	      	<h1>You new picture is ready !</h1>
 	        <img class="profile" src=<?php echo $path ?> alt="">

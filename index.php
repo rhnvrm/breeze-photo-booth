@@ -4,11 +4,27 @@
  
   $helper = $fb->getRedirectLoginHelper();
  
-  $permissions = ['email', 'user_posts','publish_actions']; // optional
+//  $permissions = ['email', 'user_posts','publish_actions']; // optional
   $callback    = 'http://localhost:8000/login.php';
+
+  $permissions = array(
+        scope =>'publish_actions',
+                'email',
+                'user_location',
+                'user_birthday',
+                'email'
+    );
+
   $loginUrl    = $helper->getLoginUrl($callback, $permissions);
 
  
+  use Facebook\FacebookRequest;
+  use Facebook\GraphUser;
+  use Facebook\FacebookRequestException;
+
+require_once( 'Facebook/FacebookRequest.php' );
+require_once( 'Facebook/GraphNodes/GraphUser.php' );
+require_once( 'Facebook/Exceptions/FacebookRequestException.php' );
 
   ?>
 
