@@ -12,12 +12,14 @@
 	$path = "cache/".$id.".jpg";
 	$_SESSION['path'] = $path;
 	// only create if not already exists in cache
-	if (!file_exists($path)){	
-		create($id, $path);
-	}
-	else{
-		echo " \n already exitst : ".$path;
-	}
+	//if($_DEV){
+		if (!file_exists($path)){	
+			create($id, $path);
+		}
+		else{
+			echo " \n already exitst : ".$path;
+		}
+	//}
 	//override line 13. Always create for testing purposes
 	//create($id, $path);
 		//output as jpeg
@@ -31,8 +33,10 @@
 	function curly($token){
 
         // create curl resource
-		$ch = curl_init();
-
+		$ch=curl_init();
+/*		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_SSLVERSION, 3);*/
         // set url
 		curl_setopt($ch, CURLOPT_URL, "https://graph.facebook.com/me?access_token=".$token);
 
