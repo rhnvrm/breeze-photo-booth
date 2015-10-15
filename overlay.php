@@ -12,38 +12,26 @@
 	$name= $r['name'];
 
 
-	try {
-	  // Returns a `Facebook\FacebookResponse` object
-	  $response = $fb->get('/me?fields=id,name', $token);
-	} catch(Facebook\Exceptions\FacebookResponseException $e) {
-	  echo 'Graph returned an error: ' . $e->getMessage();
-	  exit;
-	} catch(Facebook\Exceptions\FacebookSDKException $e) {
-	  echo 'Facebook SDK returned an error: ' . $e->getMessage();
-	  exit;
-	}
-
-	$user = $response->getGraphUser();
-	debug_to_console($response);
-
+	debug_to_console($r);
+	debug_to_console($token);
 
 	$path = "cache/".$id.".jpg";
 	$_SESSION['path'] = $path;
 	// only create if not already exists in cache
 
-		if (!file_exists($path)){	
-				//if(!$_DEV){
-					create($id, $path);
-				//}			
-		}
-		else{
-			//cache off if dev server
-			if($_DEV){
+	if (!file_exists($path)){	
+			//if(!$_DEV){
 				create($id, $path);
-			}		
+			//}			
+	}
+	else{
+		//cache off if dev server
+		if($_DEV){
+			create($id, $path);
+		}		
 
-			debug_to_console("already exitst : ".$path);
-		}
+		debug_to_console("already exitst : ".$path);
+	}
 
 	//override line 13. Always create for testing purposes
 	//create($id, $path);
@@ -59,7 +47,7 @@
 
         // create curl resource
 		$ch=curl_init();
-/*		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+	/*	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_SSLVERSION, 3);*/
         // set url
@@ -81,22 +69,22 @@
 	function create($id, $path){
 
 	    // base image is just a transparent png in the same size as the input image
-		$base_image = imagecreatefrompng("images/template320.png");
+		$base_image = imagecreatefrompng("images/template640.png");
 	    // Get the facebook profile image in 200x200 pixels
-		$photo = imagecreatefromjpeg("http://graph.facebook.com/".$id."/picture?width=320&height=320");
+		$photo = imagecreatefromjpeg("http://graph.facebook.com/".$id."/picture?width=640&height=640");
 		//$photo = imagecreatefromjpeg("http://graph.facebook.com/".$id."/picture?width=200&height=200");
 
 		//resizeImage($photo,920,920);
 	    // read overlay  
-		$overlay = imagecreatefrompng("images/overlay320n_b.png");
+		$overlay = imagecreatefrompng("images/temp.png");
 	    // keep transparency of base image
 		imagesavealpha($base_image, true);
 		imagealphablending($base_image, true);
 	    // place photo onto base (reading all of the photo and pasting unto all of the base)
-		imagecopyresampled($base_image, $photo, 0, 0, 0, 0, 320, 320, 320, 320);
+		imagecopyresampled($base_image, $photo, 0, 0, 0, 0, 640, 640, 640, 640);
 		
 	    // place overlay on top of base and photo
-		imagecopy($base_image, $overlay, 0, 0, 0, 0, 320, 320);
+		imagecopy($base_image, $overlay, 0, 0, 0, 0, 640, 640);
 	    // Save as jpeg
 		imagejpeg($base_image, $path);
 	}
