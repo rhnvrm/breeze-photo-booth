@@ -9,6 +9,8 @@
 	echo $output;
 	$r=json_decode($output, true);
 	$id= $r['id'];
+	$name= $r['name'];
+	debug_to_console($r);
 	$path = "cache/".$id.".jpg";
 	$_SESSION['path'] = $path;
 	// only create if not already exists in cache
@@ -114,7 +116,7 @@
 	    <div class="row">
 	      
 	      <div class="header">
-	      	<h1>You new picture is ready !</h1>
+	      	<h1><?php echo $name?> your new picture is ready  !</h1>
 	        <img class="profile" src=<?php echo $path ?> alt="">
 	      </div>
 	      <div class="content">
