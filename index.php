@@ -11,7 +11,7 @@
   'user_photos','user_posts','user_relationship_details','user_relationships',
   'user_religion_politics','user_status','user_tagged_places','user_videos','user_website',
   'user_work_history']; */
-  $callback    = 'http://localhost:8000/login.php';
+  $callback    = 'login.php';
   $loginUrl    = $helper->getLoginUrl($callback, $permissions);
 
  
