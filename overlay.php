@@ -1,4 +1,4 @@
-#overlay
+
 <?php 
 	require( __DIR__.'/facebook_start.php' );
 	
@@ -6,11 +6,27 @@
    	//$r = new HttpRequest('https://graph.facebook.com/me?access_token='.$r, HttpRequest::METH_POST);
 
 	$output = curly($token);
-	echo $output;
+	//echo $output;
 	$r=json_decode($output, true);
 	$id= $r['id'];
 	$name= $r['name'];
-	debug_to_console($r);
+
+
+	try {
+	  // Returns a `Facebook\FacebookResponse` object
+	  $response = $fb->get('/me?fields=id,name', $token);
+	} catch(Facebook\Exceptions\FacebookResponseException $e) {
+	  echo 'Graph returned an error: ' . $e->getMessage();
+	  exit;
+	} catch(Facebook\Exceptions\FacebookSDKException $e) {
+	  echo 'Facebook SDK returned an error: ' . $e->getMessage();
+	  exit;
+	}
+
+	$user = $response->getGraphUser();
+	debug_to_console($response);
+
+
 	$path = "cache/".$id.".jpg";
 	$_SESSION['path'] = $path;
 	// only create if not already exists in cache
@@ -26,7 +42,7 @@
 				create($id, $path);
 			}		
 
-			echo " \n already exitst : ".$path;
+			debug_to_console("already exitst : ".$path);
 		}
 
 	//override line 13. Always create for testing purposes
