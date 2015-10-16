@@ -61,7 +61,7 @@ session_write_close();
 </head>
 <body>
 <?php include_once("analyticstracking.php") ?>
-<img src="images/redfort_night.jpg" class="bg">
+<img src="images/footer_lodyas.png" class="bg">
 <div class="container">
     <div class="row">
       

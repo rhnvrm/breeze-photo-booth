@@ -43,7 +43,7 @@
   </head>
   <body>
     
-    <img src="images/redfort_night.jpg" class="bg">
+    <img src="images/footer_lodyas.png" class="bg">
     <div class="container">
       <div class="row">
         
