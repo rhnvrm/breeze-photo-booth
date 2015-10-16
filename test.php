@@ -1,7 +1,7 @@
 /<?php 
 
 	require( __DIR__.'/facebook_start.php' ); 
-
+	$token = $_SESSION['facebook_access_token'];
 ?>
 
 <html>
@@ -52,18 +52,20 @@
 
 		    console.log(data);
 
-		    FB.api(
-			    "/me/photos",
-			    "POST",
-			    {
-			        "url": "{image-url}"
-			    },
-			    function (response) {
-			      if (response && !response.error) {
-			        /* handle the result */
-			      }
+			FB.api('/photos', 'post', {
+			    message:'photo description',
+			    access_token: '<?php echo $token?>',
+			    url:data        
+			}, function(response){
+
+			    if (!response || response.error) {
+			        alert('Error occured');
+			        console.log(response.error);
+			    } else {
+			        alert('Post ID: ' + response.id);
 			    }
-			);
+
+			});
 
 
 		  }
