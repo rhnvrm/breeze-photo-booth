@@ -38,7 +38,9 @@
    		html2canvas($('#container'), {
 		  onrendered: function(canvas) {
 		  	var data = canvas.toDataURL('image/png');
-		    document.body.appendChild(data);
+		  	var DOM_img = document.createElement("img");
+		  	DOM_img.src = data;
+		    document.body.appendChild(DOM_img);
 		  }
 		});
 
