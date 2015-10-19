@@ -119,7 +119,7 @@ if(isset($_FILES['userFile']['name'])){
 
 	<div id="container">
 		<div id="fg" style="background:url('images/temp.png');display: none; z-index: 1"></div>
-		<div id="bg" style="background:url('cache/<?php echo $id+'.'+'.png'?>'); background-size: cover; z-index: 0"></div>
+		<div id="bg" style="background:url('cache/<?php echo $id.'.'.'.png'?>'); background-size: cover; z-index: 0"></div>
 	</div>
 </div>
 </body>
