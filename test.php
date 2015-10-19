@@ -38,7 +38,7 @@ if(isset($_FILES['userFile']['name'])){
     $r=json_decode($output, true);
     $id= $r['id'];
 
-   $newname = $id+"."+$ext; 
+   $newname = $id.".".$ext;
 
    $target = 'cache/'.$newname;
    move_uploaded_file( $_FILES['userFile']['tmp_name'], $target);
