@@ -42,6 +42,8 @@ if(isset($_FILES['userFile']['name'])){
 
    $target = 'cache/'.$newname;
    move_uploaded_file( $_FILES['userFile']['tmp_name'], $target);
+
+   $_SESSION['path'] = $target;
 }
  ?>
 
