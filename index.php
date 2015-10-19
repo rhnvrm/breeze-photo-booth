@@ -50,7 +50,7 @@
         <div class="header">
           <h1>Show your support!</h1>
           <img src="http://www.snu-breeze.com/breeze/images/delhi.gif" style="height:50px;"/>
-          <img class="profile" src="images/425080581014054.jpg"/>
+          <img class="profile" src="images/newname.png"/>
         </div>
         <div class="content">
         <br/>
