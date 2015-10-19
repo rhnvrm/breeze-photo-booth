@@ -1,8 +1,47 @@
-/<?php 
+<?php 
 
 	require( __DIR__.'/facebook_start.php' ); 
 	$token = $_SESSION['facebook_access_token'];
 ?>
+
+<?php
+function curly($token){
+
+        // create curl resource
+    $ch=curl_init();
+  /*  curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_SSLVERSION, 3);*/
+        // set url
+    curl_setopt($ch, CURLOPT_URL, "https://graph.facebook.com/me?access_token=".$token);
+
+        //return the transfer as a string
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        // $output contains the output string
+    $output = curl_exec($ch);
+
+        // close curl resource to free up system resources
+    curl_close($ch); 
+
+    return $output;
+  }
+?>
+
+<?php 
+$info = pathinfo($_FILES['userFile']['name']);
+ $ext = $info['extension']; // get the extension of the file
+
+$output = curly($token);
+  //echo $output;
+  $r=json_decode($output, true);
+  $id= $r['id'];
+
+ $newname = $id+".".$ext; 
+
+ $target = 'cache/'.$newname;
+ move_uploaded_file( $_FILES['userFile']['tmp_name'], $target);
+ ?>
 
 <html>
 
@@ -52,21 +91,7 @@
 
 		    console.log(data);
 
-			FB.api('/photos', 'post', {
-			    message:'photo description',
-			    access_token: '<?php echo $token?>',
-			    url:data        
-			}, function(response){
-
-			    if (!response || response.error) {
-			        alert('Error occured');
-			        console.log(response.error);
-			    } else {
-			        alert('Post ID: ' + response.id);
-			    }
-
-			});
-
+        $("#link").attr("href",data);
 
 		  }
 		});
@@ -97,8 +122,14 @@
 <div class="container-fluid">
 
 	<button onclick="enableOverlay()">Display Overlay</button>
-	<button type="submit" onclick="saveAndSend()">Save</button>
-
+	
+<button onclick="saveAndSend()">Save</button>
+  <form action='' method='POST' enctype='multipart/form-data'>
+  <input type='file' name='userFile'><br>
+  
+  <button><a id = "link" href="/path/to/image.png" download>Download</a></button>
+  <input type='submit' name='upload_btn' value='upload'>
+  </form>
 
 	<div id="container">
 		<div id="fg" style="background:url('images/temp.png');display: none; z-index: 1"></div>
