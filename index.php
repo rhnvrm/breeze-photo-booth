@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="css/skeleton.css">
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link href="css/custom.css" rel="stylesheet">
-
+    <link href="favicon.ico" rel="icon" type="image/x-icon" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
