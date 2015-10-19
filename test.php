@@ -29,18 +29,20 @@ function curly($token){
 ?>
 
 <?php 
-$info = pathinfo($_FILES['userFile']['name']);
- $ext = $info['extension']; // get the extension of the file
+if(isset($_FILES['userFile']['name'])){
+  $info = pathinfo($_FILES['userFile']['name']);
+   $ext = $info['extension']; // get the extension of the file
 
-$output = curly($token);
-  //echo $output;
-  $r=json_decode($output, true);
-  $id= $r['id'];
+  $output = curly($token);
+    //echo $output;
+    $r=json_decode($output, true);
+    $id= $r['id'];
 
- $newname = $id+".".$ext; 
+   $newname = $id+"."+$ext; 
 
- $target = 'cache/'.$newname;
- move_uploaded_file( $_FILES['userFile']['tmp_name'], $target);
+   $target = 'cache/'.$newname;
+   move_uploaded_file( $_FILES['userFile']['tmp_name'], $target);
+}
  ?>
 
 <html>
@@ -100,30 +102,12 @@ $output = curly($token);
   </script>
 </head>
 <body>
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '<?php echo $_YOUR_APP_ID ?>',
-      xfbml      : true,
-      version    : 'v2.4'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
 <div class="container-fluid">
 
 	<button onclick="enableOverlay()">Display Overlay</button>
-	
-<button onclick="saveAndSend()">Save</button>
+	<button onclick="saveAndSend()">Save</button>
+
+
   <form action='' method='POST' enctype='multipart/form-data'>
   <input type='file' name='userFile'><br>
   
@@ -133,7 +117,7 @@ $output = curly($token);
 
 	<div id="container">
 		<div id="fg" style="background:url('images/temp.png');display: none; z-index: 1"></div>
-		<div id="bg" style="background:url('images/a.jpg'); background-size: cover; z-index: 0"></div>
+		<div id="bg" style="background:url('cache/<?php echo $id+'.'+'.png'?>'); background-size: cover; z-index: 0"></div>
 	</div>
 </div>
 </body>
