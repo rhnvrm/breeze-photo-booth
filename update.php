@@ -4,9 +4,9 @@ $text = htmlspecialchars($_POST['text']);
 //echo $text;
 $text = $text . ' http://bit.do/BreezePhotoApp #RiseWithTheBreeze';
 $token = $_SESSION['facebook_access_token'];
-var_dump($_SESSION['path']);
+//var_dump($_SESSION['path']);
 $path = $_SESSION['path'];
-var_dump($path);
+//var_dump($path);
 //Upload image
 upload($path,$token,$fb,$text);
 function upload($path,$token,$fb,$text)
@@ -30,7 +30,7 @@ function upload($path,$token,$fb,$text)
 
 	$graphNode = $response->getGraphNode();
 
-	print_r($graphNode);
+	//print_r($graphNode);
 	//echo " \n Photo ID: " . $graphNode['id'];
 }
 
