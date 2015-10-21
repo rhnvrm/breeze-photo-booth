@@ -2,6 +2,7 @@
 require( __DIR__.'/facebook_start.php' );
 $text = htmlspecialchars($_POST['text']);
 //echo $text;
+$text = $text . ' http://bit.do/BreezePhotoApp #RiseWithTheBreeze'
 $token = $_SESSION['facebook_access_token'];
 var_dump($_SESSION['path']);
 $path = $_SESSION['path'];
